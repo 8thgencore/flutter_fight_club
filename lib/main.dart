@@ -28,15 +28,44 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFD5DEF0),
       body: Column(
         children: [
           SizedBox(height: 40),
           Row(
             children: [
               SizedBox(height: 16),
-              Expanded(child: Center(child: Text("You"))),
+              Expanded(
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text("You"),
+                      SizedBox(height: 11),
+                      Text("1"),
+                      Text("1"),
+                      Text("1"),
+                      Text("1"),
+                      Text("1"),
+                    ],
+                  ),
+                ),
+              ),
               SizedBox(height: 12),
-              Expanded(child: Center(child: Text("Enemy"))),
+              Expanded(
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text("Enemy"),
+                      SizedBox(height: 11),
+                      Text("1"),
+                      Text("1"),
+                      Text("1"),
+                      Text("1"),
+                      Text("1"),
+                    ],
+                  ),
+                ),
+              ),
               SizedBox(height: 16),
             ],
           ),
@@ -61,6 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       selected: defendingBodyPart == BodyPart.torso,
                       bodyPartSetter: _selectDefendingBodyPart,
                     ),
+                    SizedBox(height: 14),
+                    BodyPartButton(
+                      bodyPart: BodyPart.legs,
+                      selected: defendingBodyPart == BodyPart.legs,
+                      bodyPartSetter: _selectDefendingBodyPart,
+                    ),
                   ],
                 ),
               ),
@@ -81,6 +116,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       selected: attackingBodyPart == BodyPart.torso,
                       bodyPartSetter: _selectAttackingBodyPart,
                     ),
+                    SizedBox(height: 14),
+                    BodyPartButton(
+                      bodyPart: BodyPart.legs,
+                      selected: attackingBodyPart == BodyPart.legs,
+                      bodyPartSetter: _selectAttackingBodyPart,
+                    ),
                   ],
                 ),
               ),
@@ -94,17 +135,31 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               SizedBox(width: 16),
               Expanded(
-                child: SizedBox(
-                  height: 40,
-                  child: ColoredBox(
-                    color: Color.fromRGBO(0, 0, 0, 0.87),
-                    child: Center(
-                      child: Text(
-                        "Go".toUpperCase(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 16,
-                            color: Colors.white),
+                child: GestureDetector(
+                  onTap: () => {
+                    if (defendingBodyPart != null && attackingBodyPart != null)
+                      {
+                        setState(() {
+                          defendingBodyPart = null;
+                          attackingBodyPart = null;
+                        })
+                      }
+                  },
+                  child: SizedBox(
+                    height: 40,
+                    child: ColoredBox(
+                      color: (defendingBodyPart != null &&
+                              attackingBodyPart != null)
+                          ? Colors.black87
+                          : Colors.black38,
+                      child: Center(
+                        child: Text(
+                          "Go".toUpperCase(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 16,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
@@ -139,6 +194,7 @@ class BodyPart {
 
   static const head = BodyPart._("Head");
   static const torso = BodyPart._("Torso");
+  static const legs = BodyPart._("Legs");
 
   @override
   String toString() {
@@ -166,7 +222,7 @@ class BodyPartButton extends StatelessWidget {
         height: 40,
         child: ColoredBox(
           color:
-              selected ? const Color.fromRGBO(28, 121, 206, 1) : Colors.black26,
+              selected ? const Color.fromRGBO(28, 121, 206, 1) : Colors.black38,
           child: Center(
             child: Text(bodyPart.name.toUpperCase()),
           ),

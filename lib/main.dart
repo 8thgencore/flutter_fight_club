@@ -148,17 +148,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: SizedBox(
                     height: 40,
                     child: ColoredBox(
-                      color: (defendingBodyPart != null &&
-                              attackingBodyPart != null)
+                      color: (defendingBodyPart != null && attackingBodyPart != null)
                           ? Colors.black87
                           : Colors.black38,
                       child: Center(
                         child: Text(
                           "Go".toUpperCase(),
                           style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              fontSize: 16,
-                              color: Colors.white),
+                              fontWeight: FontWeight.w900, fontSize: 16, color: Colors.white),
                         ),
                       ),
                     ),
@@ -221,8 +218,7 @@ class BodyPartButton extends StatelessWidget {
       child: SizedBox(
         height: 40,
         child: ColoredBox(
-          color:
-              selected ? const Color.fromRGBO(28, 121, 206, 1) : Colors.black38,
+          color: selected ? const Color.fromRGBO(28, 121, 206, 1) : Colors.black38,
           child: Center(
             child: Text(bodyPart.name.toUpperCase()),
           ),

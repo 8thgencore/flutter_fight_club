@@ -139,17 +139,17 @@ class MyHomePageState extends State<MyHomePage> {
 
         if (enemyLoseLife) {
           description +=
-              "You hit enemy’s ${attackingBodyPart!.name.toLowerCase()}.";
+              "You hit enemy’s ${attackingBodyPart!.name.toLowerCase()}.\n";
         }
         if (!enemyLoseLife) {
-          description += "Your attack was blocked.";
+          description += "Your attack was blocked.\n";
         }
         if (youLoseLife) {
           description +=
-              "\nEnemy hit your ${defendingBodyPart!.name.toLowerCase()}.";
+              "Enemy hit your ${defendingBodyPart!.name.toLowerCase()}.";
         }
         if (!youLoseLife) {
-          description += "\nEnemy’s attack was blocked.";
+          description += "Enemy\’s attack was blocked.";
         }
 
         if (enemyLoseLife) {
@@ -287,25 +287,16 @@ class LivesWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: List.generate(overallLivesCount, (index) {
-        if (index < currentLivesCount) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 4),
-            child: Image.asset(
-              FightClubIcons.heartFull,
-              width: 18,
-              height: 18,
-            ),
-          );
-        } else {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 4),
-            child: Image.asset(
-              FightClubIcons.heartEmpty,
-              width: 18,
-              height: 18,
-            ),
-          );
-        }
+        return Padding(
+          padding: EdgeInsets.only(top: index > 0 ? 4 : 0),
+          child: Image.asset(
+            index < currentLivesCount
+                ? FightClubIcons.heartFull
+                : FightClubIcons.heartEmpty,
+            width: 18,
+            height: 18,
+          ),
+        );
       }),
     );
   }

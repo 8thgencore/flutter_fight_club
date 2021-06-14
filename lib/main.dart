@@ -89,8 +89,9 @@ class MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 14),
             GoButton(
-              text:
-                  yourLives == 0 || enemysLives == 0 ? "Start new game" : "Go",
+              text: (yourLives == 0 || enemysLives == 0)
+                  ? "Start new game"
+                  : "Go",
               onTap: _onGoButtonClicked,
               color: _getGoButtonColor(),
             ),
@@ -102,10 +103,10 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   String _getDescription() {
-    if (yourLives == 0) {
+    if (yourLives == 0 && enemysLives > 0) {
       return "You lost";
     }
-    if (enemysLives == 0) {
+    if (yourLives > 0 && enemysLives == 0) {
       return "You won";
     }
     if (yourLives == 0 && enemysLives == 0) {
@@ -139,7 +140,7 @@ class MyHomePageState extends State<MyHomePage> {
 
         if (enemyLoseLife) {
           description +=
-              "You hit enemy’s ${attackingBodyPart!.name.toLowerCase()}.\n";
+              "You hit enemy's ${attackingBodyPart!.name.toLowerCase()}.\n";
         }
         if (!enemyLoseLife) {
           description += "Your attack was blocked.\n";
@@ -149,7 +150,7 @@ class MyHomePageState extends State<MyHomePage> {
               "Enemy hit your ${defendingBodyPart!.name.toLowerCase()}.";
         }
         if (!youLoseLife) {
-          description += "Enemy\’s attack was blocked.";
+          description += "Enemy\'s attack was blocked.";
         }
 
         if (enemyLoseLife) {

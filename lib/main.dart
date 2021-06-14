@@ -147,7 +147,7 @@ class MyHomePageState extends State<MyHomePage> {
         }
         if (youLoseLife) {
           description +=
-              "Enemy hit your ${defendingBodyPart!.name.toLowerCase()}.";
+              "Enemy hit your ${whatEnemyAttacks.name.toLowerCase()}.";
         }
         if (!youLoseLife) {
           description += "Enemy\'s attack was blocked.";

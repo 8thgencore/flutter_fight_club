@@ -17,8 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme:
-            GoogleFonts.pressStart2pTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.pressStart2pTextTheme(Theme.of(context).textTheme),
       ),
       home: MyHomePage(),
     );
@@ -44,7 +43,7 @@ class MyHomePageState extends State<MyHomePage> {
   int yourLives = maxLives;
   int enemysLives = maxLives;
 
-  String description = "";
+  String centerText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +70,9 @@ class MyHomePageState extends State<MyHomePage> {
                     width: double.infinity,
                     child: Center(
                       child: Text(
-                        _getDescription(),
+                        centerText,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: FightClubColors.darkGreyText, fontSize: 10),
+                        style: TextStyle(color: FightClubColors.darkGreyText, fontSize: 10),
                       ),
                     ),
                   ),
@@ -89,9 +87,7 @@ class MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 14),
             GoButton(
-              text: (yourLives == 0 || enemysLives == 0)
-                  ? "Start new game"
-                  : "Go",
+              text: (yourLives == 0 || enemysLives == 0) ? "Start new game" : "Go",
               onTap: _onGoButtonClicked,
               color: _getGoButtonColor(),
             ),
@@ -100,19 +96,6 @@ class MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
-  }
-
-  String _getDescription() {
-    if (yourLives == 0 && enemysLives > 0) {
-      return "You lost";
-    }
-    if (yourLives > 0 && enemysLives == 0) {
-      return "You won";
-    }
-    if (yourLives == 0 && enemysLives == 0) {
-      return "Draw";
-    }
-    return description;
   }
 
   Color _getGoButtonColor() {
@@ -126,7 +109,7 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   void _onGoButtonClicked() {
-    description = "";
+    centerText = "";
 
     if (yourLives == 0 || enemysLives == 0) {
       setState(() {
@@ -139,25 +122,28 @@ class MyHomePageState extends State<MyHomePage> {
         final bool youLoseLife = defendingBodyPart != whatEnemyAttacks;
 
         if (enemyLoseLife) {
-          description +=
-              "You hit enemy's ${attackingBodyPart!.name.toLowerCase()}.\n";
-        }
-        if (!enemyLoseLife) {
-          description += "Your attack was blocked.\n";
-        }
-        if (youLoseLife) {
-          description +=
-              "Enemy hit your ${whatEnemyAttacks.name.toLowerCase()}.";
-        }
-        if (!youLoseLife) {
-          description += "Enemy\'s attack was blocked.";
-        }
-
-        if (enemyLoseLife) {
           enemysLives--;
         }
         if (youLoseLife) {
           yourLives--;
+        }
+
+        if (yourLives == 0 && enemysLives > 0) {
+          centerText = "You lost";
+        }
+        if (yourLives > 0 && enemysLives == 0) {
+          centerText = "You won";
+        }
+        if (yourLives == 0 && enemysLives == 0) {
+          centerText = "Draw";
+        } else {
+          String first = enemyLoseLife
+              ? "You hit enemy's ${attackingBodyPart!.name.toLowerCase()}."
+              : "Your attack was blocked.";
+          String second = youLoseLife
+              ? "Enemy hit your ${whatEnemyAttacks.name.toLowerCase()}."
+              : "Enemy\'s attack was blocked.";
+          centerText = "$first\n$second";
         }
 
         whatEnemyDefends = BodyPart.random();
@@ -208,7 +194,7 @@ class FightersInfo extends StatelessWidget {
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-n            children: [
+            children: [
               Expanded(
                 child: ColoredBox(color: FightClubColors.backgroundYou),
               ),
@@ -298,7 +284,7 @@ class LivesWidget extends StatelessWidget {
     Key? key,
     required this.overallLivesCount,
     required this.currentLivesCount,
-  })  : assert(overallLivesCount >= 1),
+  })   : assert(overallLivesCount >= 1),
         assert(currentLivesCount >= 0),
         assert(currentLivesCount <= overallLivesCount),
         super(key: key);
@@ -311,9 +297,7 @@ class LivesWidget extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: index > 0 ? 4 : 0),
           child: Image.asset(
-            index < currentLivesCount
-                ? FightClubIcons.heartFull
-                : FightClubIcons.heartEmpty,
+            index < currentLivesCount ? FightClubIcons.heartFull : FightClubIcons.heartEmpty,
             width: 18,
             height: 18,
           ),
@@ -449,17 +433,13 @@ class BodyPartButton extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: selected ? FightClubColors.blueButton : Colors.transparent,
-            border: !selected
-                ? Border.all(color: FightClubColors.darkGreyText, width: 2)
-                : null,
+            border: !selected ? Border.all(color: FightClubColors.darkGreyText, width: 2) : null,
           ),
           child: Center(
             child: Text(
               bodyPart.name.toUpperCase(),
               style: TextStyle(
-                  color: selected
-                      ? FightClubColors.whiteText
-                      : FightClubColors.darkGreyText),
+                  color: selected ? FightClubColors.whiteText : FightClubColors.darkGreyText),
             ),
           ),
         ),
@@ -494,9 +474,7 @@ class GoButton extends StatelessWidget {
               child: Text(
                 text.toUpperCase(),
                 style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 16,
-                    color: FightClubColors.whiteText),
+                    fontWeight: FontWeight.w900, fontSize: 16, color: FightClubColors.whiteText),
               ),
             ),
           ),

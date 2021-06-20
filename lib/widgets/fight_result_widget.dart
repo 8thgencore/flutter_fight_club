@@ -28,8 +28,8 @@ class FightResultWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [
                     FightClubColors.backgroundYou,
-                    FightClubColors.backgroundEnemy
-                  ])),
+                    FightClubColors.backgroundEnemy],),
+                  ),
                 ),
               ),
               Expanded(
@@ -38,22 +38,25 @@ class FightResultWidget extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                children: [
-                  const SizedBox(height: 12),
-                  Text(
-                    "You",
-                    style: TextStyle(color: FightClubColors.darkGreyText),
-                  ),
-                  const SizedBox(height: 10),
-                  Image.asset(
-                    FightClubImages.youAvatar,
-                    height: 92,
-                    width: 92,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 12),
+                    Text(
+                      "You",
+                      style: TextStyle(color: FightClubColors.darkGreyText),
+                    ),
+                    const SizedBox(height: 10),
+                    Image.asset(
+                      FightClubImages.youAvatar,
+                      height: 92,
+                      width: 92,
+                    ),
+                  ],
+                ),
               ),
               Container(
                 padding: EdgeInsets.all(12),
@@ -66,20 +69,23 @@ class FightResultWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
-              Column(
-                children: [
-                  const SizedBox(height: 12),
-                  Text(
-                    "Enemy",
-                    style: TextStyle(color: FightClubColors.darkGreyText),
-                  ),
-                  const SizedBox(height: 10),
-                  Image.asset(
-                    FightClubImages.enemyAvatar,
-                    height: 92,
-                    width: 92,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(right: 30),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 12),
+                    Text(
+                      "Enemy",
+                      style: TextStyle(color: FightClubColors.darkGreyText),
+                    ),
+                    const SizedBox(height: 10),
+                    Image.asset(
+                      FightClubImages.enemyAvatar,
+                      height: 92,
+                      width: 92,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_fight_club/fight_club_colors.dart';
-import 'package:flutter_fight_club/fight_club_images.dart';
+import 'package:flutter_fight_club/resources/fight_club_colors.dart';
+import 'package:flutter_fight_club/resources/fight_club_images.dart';
 import 'package:flutter_fight_club/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 

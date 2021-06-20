@@ -23,4 +23,15 @@ class FightResult {
   String toString() {
     return 'FightResult{result: $result}';
   }
+
+  static FightResult? fromString(String s) {
+    switch (s.toLowerCase()) {
+      case "won":
+        return won;
+      case "lost":
+        return lost;
+      case "draw":
+        return draw;
+    }
+  }
 }

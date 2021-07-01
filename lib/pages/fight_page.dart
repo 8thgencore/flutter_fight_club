@@ -132,18 +132,10 @@ class FightPageState extends State<FightPage> {
         if (fightResult != null) {
           SharedPreferences.getInstance().then(
             (sp) {
-              switch (fightResult) {
-                case FightResult.won:
-                  sp.setInt("stats_won", (sp.getInt("stats_won") ?? 0) + 1);
-                  break;
-                case FightResult.lost:
-                  sp.setInt("stats_lost", (sp.getInt("stats_lost") ?? 0) + 1);
-                  break;
-                case FightResult.draw:
-                  sp.setInt("stats_draw", (sp.getInt("stats_draw") ?? 0) + 1);
-                  break;
-              }
-              return sp.setString("last_fight_result", fightResult.result);
+              sp.setString("last_fight_result", fightResult.result);
+              final String key = "stats_${fightResult.result.toLowerCase()}";
+              final int currentValue = sp.getInt(key) ?? 0;
+              sp.setInt(key, currentValue + 1);
             },
           );
         }

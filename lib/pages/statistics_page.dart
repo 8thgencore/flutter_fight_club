@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fight_club/fight_result.dart';
 import 'package:flutter_fight_club/resources/fight_club_colors.dart';
 import 'package:flutter_fight_club/widgets/secondary_action_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +27,11 @@ class StatisticsPage extends StatelessWidget {
             ),
             Expanded(
               child: FutureBuilder<SharedPreferences>(
+                future: SharedPreferences.getInstance(),
                 builder: (context, snapshot) {
+                  if (!snapshot.hasData || snapshot.data == null) {
+                    return const SizedBox();
+                  }
                   final int won = snapshot.data?.getInt("stats_won") ?? 0;
                   final int draw = snapshot.data?.getInt("stats_draw") ?? 0;
                   final int lost = snapshot.data?.getInt("stats_lost") ?? 0;
@@ -60,7 +65,6 @@ class StatisticsPage extends StatelessWidget {
                     ],
                   );
                 },
-                future: SharedPreferences.getInstance(),
               ),
             ),
             Padding(
